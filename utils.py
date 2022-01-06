@@ -99,13 +99,13 @@ def merge_color_channels(version: int, img1: Image, img2: Image, img3: Image = N
     :param img3: The third generated QR Code - BLUE
     :return: void
     """
-
+    output_size = 200 + version * 32
     if img3 is None:
-        dummy_img3 = Image.new("RGB", (232, 232), color="black")
+        dummy_img3 = Image.new("RGB", (output_size, output_size), color="black")
     else:
         dummy_img3 = img3
 
-    output_size = 200 + version * 32
+
     output = Image.new("RGB", (output_size, output_size), color="white")
     output_pixel_map = output.load()
 

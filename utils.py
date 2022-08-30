@@ -1,5 +1,6 @@
 from PIL import Image
 import pyqrcode
+import os
 
 
 def is_cjk(character):
@@ -105,7 +106,6 @@ def merge_color_channels(version: int, img1: Image, img2: Image, img3: Image = N
     else:
         dummy_img3 = img3
 
-
     output = Image.new("RGB", (output_size, output_size), color="white")
     output_pixel_map = output.load()
 
@@ -142,3 +142,7 @@ def merge_color_channels(version: int, img1: Image, img2: Image, img3: Image = N
                 output_pixel_map[i, j] = (255, 255, 255)
 
     output.save("qr_to_show.png")
+    if os.path.exists("./qr1.png"):
+        for i in range(1, 4):
+            os.remove("./qr" + str(i) + ".png")
+

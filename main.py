@@ -3,15 +3,17 @@ import pyqrcode
 from PIL import ImageTk, Image
 from decision_methods import *
 from utils import get_hard_limit, merge_color_channels, create_qr_code
+from read_qr_window import ReadWindow
+import random
 
 img = None
-
 
 def create_image():
     """
     Creates the image seen on the UI.
     :return: void
     """
+    global iteration
     text = input_text_field.get("1.0", "end").strip()
     # print("Encoding " + text)
     selected_version = int(base2.get().split(" ")[1])
@@ -39,7 +41,7 @@ def create_image():
 
             red_qr_code_raw = Image.open("qr1.png").convert("RGB")
             green_qr_code_raw = Image.open("qr2.png").convert("RGB")
-            merge_color_channels(selected_version, red_qr_code_raw, green_qr_code_raw)
+            merge_color_channels(selected_version, iteration, red_qr_code_raw, green_qr_code_raw)
 
         elif hard_limit * 2 < len(text) < hard_limit * 3:
             text1 = text[0:hard_limit]
@@ -55,9 +57,9 @@ def create_image():
             red_qr_code_raw = Image.open("qr1.png").convert("RGB")
             green_qr_code_raw = Image.open("qr2.png").convert("RGB")
             blue_qr_code_raw = Image.open("qr3.png").convert("RGB")
+
             merge_color_channels(selected_version, red_qr_code_raw, green_qr_code_raw, blue_qr_code_raw)
 
-    # print("Code generated!")
     global img
     img = None
     generated_code = Image.open("qr_to_show.png").resize((370, 370))
@@ -87,6 +89,10 @@ def change_version_states(event):
         for option in range(0, smallest_available_version - 1):
             dropdown2['menu'].entryconfigure(option, state="disabled")
         base2.set(versions[smallest_available_version - 1])
+
+
+def spawn_window():
+    reader_window = ReadWindow()
 
 
 ### Window Parameters
@@ -129,6 +135,10 @@ dropdown2.pack()
 ### Button for QR Creation
 create_btn = tk.Button(side_panel, height=2, width=25, text="Create", command=create_image)
 create_btn.pack()
+
+### Read QR Code
+read_btn = tk.Button(side_panel, height=2, width=25, text="Read", command=spawn_window)
+read_btn.pack()
 
 ### Place for the QR Code
 QR_CANVAS_SIZE = 370

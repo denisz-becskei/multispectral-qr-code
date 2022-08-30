@@ -1,0 +1,2 @@
+multispectral qr
+normal qr

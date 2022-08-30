@@ -1,2 +1,4 @@
 Pillow==9.0.0
 PyQRCode==1.2.1
+pypng==0.20220715.0
+tensorflow==2.9.1

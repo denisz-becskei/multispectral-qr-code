@@ -143,6 +143,10 @@ def merge_color_channels(version: int, img1: Image, img2: Image, img3: Image = N
 
     output.save("qr_to_show.png")
     if os.path.exists("./qr1.png"):
-        for i in range(1, 4):
+        if os.path.exists("./qr3.png"):
+            end = 4
+        else:
+            end = 3
+        for i in range(1, end):
             os.remove("./qr" + str(i) + ".png")
 

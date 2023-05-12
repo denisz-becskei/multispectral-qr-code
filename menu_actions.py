@@ -1,4 +1,4 @@
-from values import QR_CANVAS_SIZE, WINDOW_SIZE_X, MODES, VERSIONS
+from values import MODES, VERSIONS
 
 
 def new_doc(canvas, text_field, base, base2):

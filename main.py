@@ -1,12 +1,14 @@
+import os
 import tkinter as tk
 from tkinter.filedialog import asksaveasfile
+
 import pyqrcode
-import os
 from PIL import ImageTk, Image
+
 from decision_methods import *
-from utils import get_hard_limit, merge_color_channels, create_qr_code
-from read_qr_window import ReadWindow
 from menu_actions import new_doc
+from read_qr_window import ReadWindow
+from utils import get_hard_limit, merge_color_channels, create_qr_code
 from values import WINDOW_SIZE_CONCAT, WINDOW_SIZE_X, SIDE_PANEL_SIZE, QR_CANVAS_SIZE, MODES, VERSIONS
 
 img = None
@@ -104,7 +106,7 @@ def start_anew():
     new_doc(qr_canvas, input_text_field, base, base2)
 
 
-def save_image(ext: str):
+def save_image(ext):
     if ext == "png":
         description = "PNG (*.PNG;*.PNG)"
     elif ext == "pdf":
@@ -125,11 +127,11 @@ def save_image(ext: str):
         # TODO: saved file hogged by Python
 
 
-
 ### Window Creation
 window = tk.Tk()
 window.title("Multispectral QR Code")
 window.geometry(WINDOW_SIZE_CONCAT)
+window.resizable(False, False)
 
 ### Side Panel
 side_panel = tk.Canvas(window, height=SIDE_PANEL_SIZE[1], width=SIDE_PANEL_SIZE[0])

@@ -1,4 +1,6 @@
 Pillow>=9.0.1
 PyQRCode==1.2.1
 pypng==0.20220715.0
-tensorflow==2.9.1
+future~=0.18.2
+numpy~=1.24.0
+opencv-python~=4.5.5.62
